@@ -1,0 +1,50 @@
+@import "../../assets/styles/mainVariables";
+
+.PrimaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $elementMainHeight;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0 35px;
+  border: none;
+  text-transform: capitalize;
+  -webkit-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+  background-color: $brandSecColor;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:not(:disabled):hover {
+    background-color: $brandColor;
+  }
+
+  //&:not(.without-hover):hover {
+  //  background-color: $brandSecColor !important;
+  //}
+
+
+  &.bordered {
+    color: #202020;
+    background: inherit !important;
+    border: 1px solid #202020;
+  }
+
+  &:disabled {
+    color: #202020;
+    cursor: not-allowed;
+    background: #f5f5f5 !important;
+  }
+
+  .flex-row {
+    display: flex;
+    align-items: center;
+
+    .ant-spin {
+      margin-left: 8px;
+    }
+  }
+}

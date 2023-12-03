@@ -1,0 +1,3 @@
+export const GENERAL_CONSTS = {
+    REGISTER_ORDER: "REGISTER_ORDER",
+};
