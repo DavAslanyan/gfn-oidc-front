@@ -4,10 +4,12 @@ export const request = ({
                             url,
                             method = "GET",
                             data = null,
+                            customHeadersProps = {},
                         }) => {
     let headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
+        ...customHeadersProps,
     };
 
     const requestData = {

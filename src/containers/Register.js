@@ -123,6 +123,7 @@ function Register(props) {
                 >
                 </InputGroup>
                 <PrimaryButton
+                    disabled={true}
                     title={'Sign Up'}
                     cb={registerUser}/>
                 <div className={'line'}/>

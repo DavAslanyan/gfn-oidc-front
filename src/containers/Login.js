@@ -11,21 +11,26 @@ import {PrimaryButton} from "../components/buttons/Buttons";
 import {InputGroup} from "../components/uiElements/input-group/InputGroup";
 import {Logo} from "../assets/images";
 import {Link, useLocation} from "react-router-dom";
+import {getPropsFromState} from "../redux/mapStateToProps";
+import {CheckLoginCredentials} from "../redux/actions";
+import {connect} from "react-redux";
+import {OIDC_URL} from "../redux/api";
 
 const initData = {
-    username: '',
-    password: '',
+    username: '37490123456',
+    password: 'Admin123',
 }
 const initErrorData = {
     username: false,
     password: false,
 }
 
-function Login() {
+function Login(props) {
     const location = useLocation();
     const urlParams = new URLSearchParams(location.search);
-    const uid = urlParams.get('uid');
-    console.log('uid', uid)
+    const uid = urlParams.get('urlParamsid');
+    const redirect = urlParams.get('redirect');
+    // console.log('uid', uid)
     const [loginData, setLoginData] = useState(initData);
     const [errors, setErrors] = useState(initErrorData);
 
@@ -53,10 +58,20 @@ function Login() {
         }
         if (result) {
 
-            redirectByPost(`http://localhost:4000/interaction/${uid}`, {
+            // redirectByPost(`http://localhost:4000/interaction/${uid}`, {
+            //     username: loginData.username,
+            //     password: loginData.password,
+            // })
+            props.CheckLoginCredentials({
                 username: loginData.username,
-                password: loginData.password,
+                password: loginData.password
+            }).then(()=>{
+                redirectByPost(redirect, {
+                    username: loginData.username,
+                    password: loginData.password,
+                })
             })
+
         } else {
             setErrors(err)
         }
@@ -70,8 +85,8 @@ function Login() {
         form.name = "reg-form";
         form.action = url;
         form.method = "post";
-        form.enctype = "multipart/form-data";
-        form.target = "_blank";
+        form.enctype = "application/x-www-form-urlencoded";
+        // form.target = "_blank";
 
         Object.keys(parameters).forEach(function (key) {
             let input = document.createElement("input");
@@ -134,7 +149,7 @@ function Login() {
                 {/*</div>*/}
                 <div className={'line'}/>
                 <footer className={'footer'}>
-                    Don't have an account? <Link to={'/register'}>Register now</Link>
+                    Don't have an account? <Link to={'/register'} >Register now</Link>
                 </footer>
             </div>
 
@@ -142,4 +157,13 @@ function Login() {
     </AuthWrapper>
 }
 
-export default Login
+
+const mapStateToProps = (state) => {
+    return getPropsFromState(state, [])
+};
+
+const mapDispatchToProps = {
+    CheckLoginCredentials,
+    Login,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

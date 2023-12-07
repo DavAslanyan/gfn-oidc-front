@@ -1,7 +1,9 @@
 //----------------------------------Official-server---------------------------------------------------
 
 //----------------------------------4Steps-server---------------------------------------------------
-const BASE_URL = "http://173.212.233.220:3600/api/v1";
+export const BASE_URL = "http://localhost:4000/api/v1";
+export const OIDC_URL = "http://localhost:4000/authorize";
 
 
-export const _urlRegister = BASE_URL + "/register";
+export const urlCheckLogin =  BASE_URL + "/user/check-login";
+export const urlRegister = BASE_URL + "/register";
