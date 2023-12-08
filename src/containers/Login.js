@@ -17,8 +17,8 @@ import {connect} from "react-redux";
 import {OIDC_URL} from "../redux/api";
 
 const initData = {
-    username: '37490123456',
-    password: 'Admin123',
+    username: '',
+    password: '',
 }
 const initErrorData = {
     username: false,
